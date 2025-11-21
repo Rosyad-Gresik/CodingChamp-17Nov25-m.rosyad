@@ -30,6 +30,51 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+// --- KODE JAVASCRIPT UNTUK POP-UP TERIMA KASIH ---
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Dapatkan elemen-elemen penting
+    const contactForm = document.querySelector('.contact__form');
+    const modal = document.getElementById("thankYouModal");
+    const span = document.getElementsByClassName("close-button")[0];
+
+    if (contactForm && modal && span) {
+        // Logika saat formulir di-submit
+        contactForm.addEventListener('submit', function(event) {
+            // Jika Anda tidak ingin halaman merefresh/berpindah (karena tidak ada backend), 
+            // cegah aksi default submit
+            event.preventDefault(); 
+
+            // Cek apakah formulir valid (memanfaatkan validasi required dan type="email" dari HTML5)
+            // Note: checkValidity() hanya berfungsi setelah preventDefault() dipanggil
+            if (contactForm.checkValidity()) {
+                // Tampilkan modal terima kasih
+                modal.style.display = "flex"; 
+                
+                // Opsional: Reset formulir agar kolom kosong lagi setelah dikirim
+                contactForm.reset();
+                
+            } else {
+                // Jika validasi HTML5 gagal (misalnya kolom kosong), browser akan 
+                // menampilkan pesan error bawaannya secara otomatis.
+            }
+        });
+
+        // Logika untuk menutup modal ketika tombol 'x' diklik
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Logika untuk menutup modal ketika pengguna mengklik di luar area modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+});
+
+// Pastikan kode welcomeMessage() dan kode JS lainnya juga ada di file ini.
 // --- KODE JAVASCRIPT WELCOME MESSAGE DENGAN LOCAL STORAGE ---
 
 // Panggil fungsi segera setelah script dimuat
